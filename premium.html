@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EddiePulse Premium Analytics</title>
+<title>EddiePulse Premium</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -18,202 +19,466 @@ body {
   color: white;
 }
 
-header {
-  text-align: center;
-  padding: 30px 20px;
-  background: #0d1b2e;
-}
-
-.logo {
-  font-size: 28px;
-  font-weight: 800;
-}
-
-.subtitle {
-  color: #aebdce;
-  margin-top: 8px;
-}
-
 .container {
   max-width: 700px;
   margin: auto;
-  padding: 20px;
+  padding: 25px 20px;
 }
 
 .card {
   background: #102238;
   border: 1px solid #1d3a58;
   border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 18px;
+  padding: 22px;
+  margin-bottom: 20px;
 }
 
-h2 {
-  margin-top: 0;
+h1 {
+  text-align: center;
+  margin-bottom: 8px;
 }
 
-.match {
-  padding: 16px 0;
-  border-bottom: 1px solid #29415b;
+.subtitle {
+  text-align: center;
+  color: #aebdce;
+  margin-bottom: 25px;
 }
 
-.match:last-child {
-  border-bottom: none;
+input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #29415b;
+  background: #08111f;
+  color: white;
+  font-size: 16px;
 }
 
-.teams {
-  font-size: 18px;
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: #25d366;
+  color: white;
+  font-size: 17px;
   font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+.logout {
+  background: #334155;
+}
+
+.message {
+  text-align: center;
+  margin-top: 15px;
+  line-height: 1.5;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+.success {
+  color: #25d366;
+}
+
+.premium-content {
+  display: none;
 }
 
 .pick {
+  padding: 15px 0;
+  border-bottom: 1px solid #29415b;
+}
+
+.pick:last-child {
+  border-bottom: none;
+}
+
+.pick strong {
   color: #25d366;
-  font-weight: bold;
-  margin-top: 7px;
-}
-
-.analysis {
-  color: #aebdce;
-  font-size: 14px;
-  line-height: 1.6;
-  margin-top: 7px;
-}
-
-.badge {
-  display: inline-block;
-  background: #25d366;
-  color: #08111f;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.notice {
-  color: #aebdce;
-  font-size: 13px;
-  line-height: 1.6;
-  text-align: center;
 }
 
 .back {
   display: block;
   text-align: center;
-  text-decoration: none;
-  background: #1d3a58;
-  color: white;
-  padding: 14px;
-  border-radius: 12px;
-  font-weight: bold;
+  color: #aebdce;
   margin-top: 20px;
+  text-decoration: none;
 }
 
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #8294a8;
+.small {
+  color: #aebdce;
   font-size: 13px;
+  text-align: center;
+  line-height: 1.5;
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">⚡ EddiePulse Analytics</div>
-
-  <div class="subtitle">
-    💎 Premium Football Analytics
-  </div>
-</header>
-
 <div class="container">
 
-  <div class="card">
-    <div class="badge">💎 PREMIUM ACCESS</div>
+  <!-- LOGIN -->
+  <div class="card" id="loginCard">
 
-    <h2>🔥 Today's Premium Picks</h2>
+    <h1>🔐 EddiePulse Premium</h1>
 
-    <div class="match">
-      <div class="teams">Team A vs Team B</div>
-      <div class="pick">Prediction: Over 1.5 Goals</div>
-      <div class="analysis">
-        Goal-scoring trends and recent performances indicate
-        a strong possibility of at least two goals.
-      </div>
+    <div class="subtitle">
+      Login to access Premium Analytics
     </div>
 
-    <div class="match">
-      <div class="teams">Team C vs Team D</div>
-      <div class="pick">Prediction: Home Win</div>
-      <div class="analysis">
-        The home side has shown stronger recent form and
-        a better home performance record.
-      </div>
-    </div>
+    <input
+      type="email"
+      id="email"
+      placeholder="Email address"
+      autocomplete="email"
+    >
 
-    <div class="match">
-      <div class="teams">Team E vs Team F</div>
-      <div class="pick">Prediction: Both Teams To Score</div>
-      <div class="analysis">
-        Both teams have consistently created scoring
-        opportunities in recent matches.
-      </div>
-    </div>
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
-  </div>
+    <button id="loginButton">
+      🔐 Login
+    </button>
 
+    <div
+      id="loginMessage"
+      class="message"
+      aria-live="polite"
+    ></div>
 
-  <div class="card">
-
-    <h2>📊 Premium Analysis</h2>
-
-    <p>✓ Recent form analysis</p>
-    <p>✓ Goals scored and conceded</p>
-    <p>✓ Over/Under trends</p>
-    <p>✓ Both Teams To Score trends</p>
-    <p>✓ Home and away performance</p>
-    <p>✓ Match-result assessment</p>
-
-  </div>
-
-
-  <div class="card">
-
-    <h2>🎯 Analyst's Note</h2>
-
-    <p class="analysis">
-      These selections are based on statistical trends,
-      recent form and match analysis. Football outcomes
-      remain unpredictable, so no prediction is guaranteed.
+    <p class="small">
+      Premium access is available only to approved members.
     </p>
 
   </div>
 
 
-  <div class="card">
+  <!-- PREMIUM CONTENT -->
+  <div
+    class="premium-content"
+    id="premiumContent"
+  >
 
-    <h2>⚠️ Responsible Betting</h2>
+    <div class="card">
 
-    <p class="notice">
-      EddiePulse Analytics provides analysis and estimates,
-      not guaranteed results. Please bet responsibly and
-      never stake more than you can afford to lose.
-    </p>
+      <h1>💎 Premium Analytics</h1>
+
+      <div class="subtitle">
+        Welcome to EddiePulse Premium
+      </div>
+
+      <p>
+        🔥 Today's selected football analysis
+      </p>
+
+      <div class="pick">
+        ⚽ Match 1 —
+        <strong>Over 1.5 Goals</strong>
+      </div>
+
+      <div class="pick">
+        ⚽ Match 2 —
+        <strong>Home Win</strong>
+      </div>
+
+      <div class="pick">
+        ⚽ Match 3 —
+        <strong>Both Teams To Score</strong>
+      </div>
+
+      <div class="pick">
+        ⚽ Match 4 —
+        <strong>Draw No Bet</strong>
+      </div>
+
+      <p class="small">
+        These are football analysis estimates, not guaranteed results.
+        Please bet responsibly.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>📊 Premium Analysis</h2>
+
+      <p>
+        Detailed match statistics, goal trends,
+        recent form and market insights will appear here.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <button
+        class="logout"
+        id="logoutButton"
+      >
+        🚪 Logout
+      </button>
+
+    </div>
 
   </div>
 
 
-  <a class="back" href="index.html">
+  <a
+    class="back"
+    href="index.html"
+  >
     ← Back to EddiePulse Analytics
   </a>
 
 </div>
 
-<footer>
-  © 2026 EddiePulse Analytics
-</footer>
+
+<script>
+
+const SUPABASE_URL =
+  "https://mneqdvkagthqzgwsalkw.supabase.co";
+
+const SUPABASE_KEY =
+  "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+
+const loginCard =
+  document.getElementById("loginCard");
+
+const premiumContent =
+  document.getElementById("premiumContent");
+
+const loginButton =
+  document.getElementById("loginButton");
+
+const logoutButton =
+  document.getElementById("logoutButton");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+
+/* Load Supabase library */
+
+const script =
+  document.createElement("script");
+
+script.src =
+  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+script.onload = function() {
+
+  window.supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+  checkSession();
+
+};
+
+
+/* Add Supabase library to page */
+
+document.head.appendChild(script);
+
+
+/* Check existing login */
+
+async function checkSession() {
+
+  const {
+    data: {
+      session
+    }
+  } =
+  await window.supabaseClient.auth.getSession();
+
+
+  if (session) {
+
+    await checkPremiumAccess(
+      session.user.id
+    );
+
+  }
+
+}
+
+
+/* Login */
+
+loginButton.addEventListener(
+  "click",
+  async function() {
+
+    const email =
+      document.getElementById("email")
+      .value
+      .trim();
+
+    const password =
+      document.getElementById("password")
+      .value;
+
+
+    if (!email || !password) {
+
+      loginMessage.textContent =
+        "Please enter your email and password.";
+
+      loginMessage.className =
+        "message error";
+
+      return;
+
+    }
+
+
+    loginButton.disabled = true;
+
+    loginButton.textContent =
+      "Logging in...";
+
+
+    const {
+      data,
+      error
+    } =
+    await window.supabaseClient.auth.signInWithPassword({
+
+      email: email,
+
+      password: password
+
+    });
+
+
+    if (error) {
+
+      loginMessage.textContent =
+        "❌ Login failed. Check your email and password.";
+
+      loginMessage.className =
+        "message error";
+
+      loginButton.disabled = false;
+
+      loginButton.textContent =
+        "🔐 Login";
+
+      return;
+
+    }
+
+
+    await checkPremiumAccess(
+      data.user.id
+    );
+
+  }
+);
+
+
+/* Check approval */
+
+async function checkPremiumAccess(userId) {
+
+  const {
+    data,
+    error
+  } =
+  await window.supabaseClient
+    .from("premium_access")
+    .select("status")
+    .eq("user_id", userId)
+    .eq("status", "approved")
+    .maybeSingle();
+
+
+  if (error) {
+
+    loginMessage.textContent =
+      "❌ Unable to check Premium access.";
+
+    loginMessage.className =
+      "message error";
+
+    return;
+
+  }
+
+
+  if (!data) {
+
+    await window.supabaseClient.auth.signOut();
+
+    loginMessage.textContent =
+      "⏳ Your account has not been approved for Premium access yet.";
+
+    loginMessage.className =
+      "message error";
+
+    return;
+
+  }
+
+
+  /* Approved */
+
+  loginCard.style.display =
+    "none";
+
+  premiumContent.style.display =
+    "block";
+
+}
+
+
+/* Logout */
+
+logoutButton.addEventListener(
+  "click",
+  async function() {
+
+    await window.supabaseClient.auth.signOut();
+
+    premiumContent.style.display =
+      "none";
+
+    loginCard.style.display =
+      "block";
+
+    loginMessage.textContent =
+      "You have been logged out.";
+
+    loginMessage.className =
+      "message success";
+
+  }
+);
+
+</script>
 
 </body>
 </html>
