@@ -6,86 +6,117 @@
 <title>EddiePulse Analytics</title>
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#08111f;
-  color:white;
+* {
+  box-sizing: border-box;
 }
-header{
-  padding:28px 20px;
-  text-align:center;
-  background:#0d1b2e;
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #08111f;
+  color: white;
 }
-.logo{
-  font-size:30px;
-  font-weight:800;
+
+header {
+  padding: 28px 20px;
+  text-align: center;
+  background: #0d1b2e;
 }
-.logo span{color:#25d366}
-.subtitle{
-  color:#aebdce;
-  margin-top:8px;
+
+.logo {
+  font-size: 30px;
+  font-weight: 800;
 }
-.container{
-  max-width:700px;
-  margin:auto;
-  padding:20px;
+
+.subtitle {
+  color: #aebdce;
+  margin-top: 8px;
 }
-.card{
-  background:#102238;
-  border:1px solid #1d3a58;
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:18px;
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
 }
-h2{margin-top:0}
-.match{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 0;
-  border-bottom:1px solid #29415b;
+
+.card {
+  background: #102238;
+  border: 1px solid #1d3a58;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 18px;
 }
-.match:last-child{border-bottom:0}
-.pick{
-  color:#25d366;
-  font-weight:bold;
+
+h2 {
+  margin-top: 0;
 }
-.price{
-  font-size:28px;
-  font-weight:800;
-  text-align:center;
+
+.match {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #29415b;
 }
-button{
-  width:100%;
-  border:0;
-  border-radius:12px;
-  padding:15px;
-  margin-top:12px;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-}href="https://paystack.shop/pay/4z32d1u79v" target="_blank">
-💰 MTN MoMo Payment.momo{
-  background:#ffcc00;
-  color:#111;
+
+.match:last-child {
+  border-bottom: 0;
 }
-.whatsapp{0256584653
-  background:#25d366;
-  color:white;
+
+.pick {
+  color: #25d366;
+  font-weight: bold;
 }
-.notice{
-  color:#aebdce;
-  font-size:13px;
-  line-height:1.6;
-  text-align:center;
+
+.price {
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  margin: 15px 0;
 }
-footer{
-  text-align:center;
-  padding:25px;
-  color:#8294a8;
-  font-size:13px;
+
+.momo,
+.whatsapp {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 12px;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+}
+
+.momo {
+  background: #ffcc00;
+  color: #111;
+}
+
+.whatsapp {
+  background: #25d366;
+  color: white;
+}
+
+.momo-number {
+  text-align: center;
+  color: #aebdce;
+  margin-top: 12px;
+  font-size: 15px;
+}
+
+.notice {
+  color: #aebdce;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #8294a8;
+  font-size: 13px;
 }
 </style>
 </head>
@@ -94,7 +125,9 @@ footer{
 
 <header>
   <div class="logo">⚡ EddiePulse Analytics</div>
-  <div class="subtitle">Football insights • Match analysis • Predictions</div>
+  <div class="subtitle">
+    Football insights • Match analysis • Predictions
+  </div>
 </header>
 
 <div class="container">
@@ -120,16 +153,43 @@ footer{
 
   <div class="card">
     <h2>💎 Premium Analytics</h2>
-    <p>Get access to selected football analysis and prediction picks.</p>
+
+    <p>
+      Get access to selected football analysis and prediction picks.
+    </p>
 
     <div class="price">GH₵50</div>
 
-    <button class="momo">💰 MTN MoMo Payment</button>
-    <button class="whatsapp">📲 Confirm Payment on WhatsApp</button>
+    <div class="momo-number">
+      📱 MTN MoMo: <strong>0256584653</strong>
+    </div>
+
+    <a
+      class="momo"
+      href="https://paystack.shop/pay/4z32d1u79v"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      💰 Pay GH₵50 with MTN MoMo
+    </a>
+
+    <a
+      class="whatsapp"
+      href="https://wa.me/233256584653?text=Hello%20EddiePulse%2C%20I%20have%20paid%20for%20Premium%20Analytics.%20Please%20confirm%20my%20payment."
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      📲 Confirm Payment on WhatsApp
+    </a>
+
+    <p class="notice">
+      Payment is processed securely through Paystack.
+    </p>
   </div>
 
   <div class="card">
     <h2>⚽ What We Provide</h2>
+
     <p>✓ Match statistics</p>
     <p>✓ Goal analysis</p>
     <p>✓ Over/Under insights</p>
@@ -139,6 +199,7 @@ footer{
 
   <div class="card">
     <h2>⚠️ Important</h2>
+
     <p class="notice">
       EddiePulse Analytics provides football analysis and estimates.
       Predictions are not guaranteed results. Please bet responsibly.
