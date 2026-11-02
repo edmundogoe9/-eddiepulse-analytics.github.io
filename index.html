@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EddiePulse Analytics</title>
+
+<title>EddiePulse Analytics | Football Insights</title>
+
+<meta name="description" content="EddiePulse Analytics provides football statistics, match analysis, free predictions and exclusive premium football insights.">
 
 <style>
 * {
@@ -18,9 +21,9 @@ body {
 }
 
 header {
-  padding: 28px 20px;
+  padding: 32px 20px;
   text-align: center;
-  background: #0d1b2e;
+  background: linear-gradient(135deg, #0d1b2e, #163451);
 }
 
 .logo {
@@ -34,7 +37,7 @@ header {
 }
 
 .container {
-  max-width: 700px;
+  max-width: 750px;
   margin: auto;
   padding: 20px;
 }
@@ -44,51 +47,75 @@ header {
   border: 1px solid #1d3a58;
   border-radius: 18px;
   padding: 20px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 h2 {
   margin-top: 0;
 }
 
-.match {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid #29415b;
+.description {
+  color: #bdc8d8;
+  line-height: 1.6;
 }
 
-.match:last-child {
-  border-bottom: 0;
+.match {
+  background: #0b192a;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+
+.match-name {
+  font-weight: bold;
+  font-size: 17px;
 }
 
 .pick {
   color: #25d366;
   font-weight: bold;
+  margin-top: 9px;
+}
+
+.analysis {
+  color: #bdc8d8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.badge {
+  display: inline-block;
+  background: #164c36;
+  color: #7cf0ae;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 12px;
 }
 
 .price {
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 800;
   text-align: center;
-  margin: 15px 0;
+  margin: 20px 0;
+  color: #ffcc00;
 }
 
-.momo,
-.whatsapp {
+.button {
   display: block;
   width: 100%;
   border-radius: 12px;
-  padding: 15px;
-  margin-top: 12px;
-  font-size: 17px;
+  padding: 16px;
+  margin-top: 13px;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
 }
 
-.momo {
+.pay-button {
   background: #ffcc00;
   color: #111;
 }
@@ -98,14 +125,11 @@ h2 {
   color: white;
 }
 
-.momo-number {
-  text-align: center;
-  color: #aebdce;
-  margin-top: 12px;
-  font-size: 15px;
+.premium-button {
+  background: #35d07f;
+  color: #08111f;
 }
 
-/* Premium request form */
 input {
   width: 100%;
   padding: 14px;
@@ -136,7 +160,6 @@ input::placeholder {
 
 .submit-button:disabled {
   opacity: 0.6;
-  cursor: not-allowed;
 }
 
 .request-message {
@@ -148,8 +171,17 @@ input::placeholder {
 .notice {
   color: #aebdce;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.7;
   text-align: center;
+}
+
+.empty-state {
+  padding: 20px;
+  background: #0b192a;
+  border-radius: 12px;
+  text-align: center;
+  color: #bdc8d8;
+  line-height: 1.6;
 }
 
 footer {
@@ -165,76 +197,94 @@ footer {
 
 <header>
   <div class="logo">⚡ EddiePulse Analytics</div>
+
   <div class="subtitle">
-    Football insights • Match analysis • Predictions
+    Football Insights • Match Analysis • Predictions
   </div>
+
+  <p class="description">
+    Making football analysis easier to understand.
+  </p>
 </header>
 
 <div class="container">
 
-  <div class="card">
-    <h2>🔥 Today's Analytics</h2>
+  <!-- FREE PREDICTIONS -->
 
-    <div class="match">
-      <div>Team A vs Team B</div>
-      <div class="pick">Over 1.5</div>
-    </div>
+  <section class="card" id="free-predictions">
 
-    <div class="match">
-      <div>Team C vs Team D</div>
-      <div class="pick">Home Win</div>
-    </div>
+    <span class="badge">FREE ACCESS</span>
 
-    <div class="match">
-      <div>Team E vs Team F</div>
-      <div class="pick">Both Teams Score</div>
-    </div>
-  </div>
+    <h2>⚽ Today's Free Predictions</h2>
 
-  <div class="card">
-    <h2>💎 Premium Analytics</h2>
-
-    <p>
-      Get access to selected football analysis and prediction picks.
+    <p class="description">
+      Welcome to EddiePulse Free Predictions.
+      Explore our free football analysis and daily selections.
     </p>
 
-    <div class="price">GH₵50</div>
+    <div class="empty-state">
+      <h3>📊 Free Picks Coming Soon</h3>
 
-    <div class="momo-number">
-      📱 MTN MoMo: <strong>0256584653</strong>
+      <p>
+        Our next free football selections will appear here.
+        Check back for match analysis and predictions.
+      </p>
     </div>
 
+  </section>
+
+
+  <!-- PREMIUM ANALYTICS -->
+
+  <section class="card" id="premium">
+
+    <span class="badge">EXCLUSIVE ACCESS</span>
+
+    <h2>💎 EddiePulse Premium Analytics</h2>
+
+    <p class="description">
+      Get access to exclusive football selections,
+      additional match analysis and premium insights.
+    </p>
+
+    <div class="price">GH₵80</div>
+
     <a
-      class="momo"
+      class="button pay-button"
       href="https://paystack.shop/pay/4z32d1u79v"
       target="_blank"
       rel="noopener noreferrer"
     >
-      💰 Pay GH₵80 with MTN MoMo
+      💰 Subscribe to Premium – GH₵80
     </a>
 
     <a
-      class="whatsapp"
-      href="https://wa.me/233256584653?text=Hello%20EddiePulse%2C%20I%20have%20paid%20for%20Premium%20Analytics.%20Please%20confirm%20my%20payment."
+      class="button whatsapp"
+      href="https://wa.me/233256584653?text=Hello%20EddiePulse%2C%20I%20need%20help%20with%20Premium%20Analytics."
       target="_blank"
       rel="noopener noreferrer"
     >
-      📲 Confirm Payment on WhatsApp
+      📲 Contact EddiePulse on WhatsApp
     </a>
 
     <p class="notice">
-      Payment is processed securely through Paystack.
+      Payments are processed through Paystack.
+      Follow the instructions below after completing payment.
     </p>
-  </div>
 
-  <!-- PREMIUM ACCESS REQUEST FORM -->
-  <div class="card">
+  </section>
+
+
+  <!-- PREMIUM ACCESS REQUEST -->
+
+  <section class="card">
 
     <h2>🔐 Request Premium Access</h2>
 
-    <p>
-      After paying GH₵80, enter your details below.
-      Your payment will be checked manually before access is approved.
+    <p class="description">
+      After completing your GH₵80 payment, enter your
+      details and Paystack payment reference.
+      Your payment will be verified manually.
     </p>
 
     <form id="premiumRequestForm">
@@ -276,42 +326,80 @@ footer {
       aria-live="polite"
     ></div>
 
-  </div>
+  </section>
 
-  <div class="card">
+
+  <!-- WHAT WE PROVIDE -->
+
+  <section class="card">
+
     <h2>⚽ What We Provide</h2>
 
-    <p>✓ Match statistics</p>
+    <p>✓ Football match statistics</p>
     <p>✓ Goal analysis</p>
     <p>✓ Over/Under insights</p>
     <p>✓ Both Teams To Score analysis</p>
     <p>✓ Match-result predictions</p>
-  </div>
+    <p>✓ Premium football insights</p>
 
-  <div class="card">
-    <h2>⚠️ Important</h2>
+  </section>
+
+
+  <!-- CUSTOMER INSTRUCTIONS -->
+
+  <section class="card">
+
+    <h2>📌 How to Join Premium</h2>
+
+    <p>1. Explore EddiePulse Analytics.</p>
+
+    <p>2. Subscribe through our Paystack payment page.</p>
+
+    <p>3. Complete your GH₵80 payment.</p>
+
+    <p>4. Submit your payment reference and WhatsApp number.</p>
+
+    <p>5. Wait for manual payment verification.</p>
+
+    <p>6. Receive your Premium account access after approval.</p>
+
+  </section>
+
+
+  <!-- RESPONSIBLE BETTING -->
+
+  <section class="card">
+
+    <h2>⚠️ Responsible Betting</h2>
 
     <p class="notice">
-      EddiePulse Analytics provides football analysis and estimates.
-      Predictions are not guaranteed results. Please bet responsibly.
+      EddiePulse Analytics provides football analysis
+      and predictions for informational purposes.
+
+      Predictions are not guaranteed results.
+      Always make responsible decisions and never
+      stake money you cannot afford to lose.
     </p>
-  </div>
+
+  </section>
 
 </div>
 
 <footer>
-  © 2026 EddiePulse Analytics
+  © 2026 EddiePulse Analytics.
+  All rights reserved.
 </footer>
 
 
-<!-- SUPABASE -->
+<!-- SUPABASE CONNECTION -->
+
 <script>
 
 const SUPABASE_URL =
   "https://mneqdvkagthqzgwsalkw.supabase.co";
 
 const SUPABASE_KEY =
-  "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+  "sb_publishable_QPWs81qv_fV4k7NptQ7HCQ_KZ7hv16X";
 
 
 const form =
@@ -341,13 +429,14 @@ form.addEventListener("submit", async function(event) {
   if (!fullName || !whatsappNumber || !paymentReference) {
 
     requestMessage.textContent =
-      "Please fill in all fields.";
+      "Please complete all fields.";
 
     return;
   }
 
 
   submitButton.disabled = true;
+
   submitButton.textContent = "Submitting...";
 
   requestMessage.textContent = "";
@@ -358,13 +447,19 @@ form.addEventListener("submit", async function(event) {
     const response = await fetch(
       SUPABASE_URL + "/rest/v1/premium_requests",
       {
+
         method: "POST",
 
         headers: {
+
           "apikey": SUPABASE_KEY,
+
           "Authorization": "Bearer " + SUPABASE_KEY,
+
           "Content-Type": "application/json",
+
           "Prefer": "return=minimal"
+
         },
 
         body: JSON.stringify({
@@ -378,22 +473,21 @@ form.addEventListener("submit", async function(event) {
           status: "pending"
 
         })
+
       }
     );
 
 
     if (!response.ok) {
 
-      throw new Error(
-        "Could not submit request."
-      );
+      throw new Error("Request could not be submitted.");
 
     }
 
 
     requestMessage.textContent =
-      "✅ Request submitted successfully! " +
-      "Your payment will be checked and your Premium access will be approved.";
+      "✅ Your request has been submitted successfully! " +
+      "We will verify your payment and contact you about Premium access.";
 
     form.reset();
 
@@ -401,9 +495,10 @@ form.addEventListener("submit", async function(event) {
   } catch (error) {
 
     requestMessage.textContent =
-      "❌ Something went wrong. Please try again.";
+      "❌ Submission failed. Please check your details and try again.";
 
     console.error(error);
+
 
   } finally {
 
