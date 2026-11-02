@@ -7,10 +7,7 @@
 <title>EddiePulse Premium</title>
 
 <style>
-
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -33,10 +30,7 @@ body {
   margin-bottom: 20px;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 8px;
-}
+h1 { text-align: center; }
 
 .subtitle {
   text-align: center;
@@ -47,8 +41,7 @@ h1 {
 input {
   width: 100%;
   padding: 15px;
-  margin-top: 10px;
-  margin-bottom: 12px;
+  margin: 10px 0;
   border-radius: 10px;
   border: 1px solid #29415b;
   background: #08111f;
@@ -69,13 +62,9 @@ button {
   margin-top: 8px;
 }
 
-button:disabled {
-  opacity: 0.6;
-}
+button:disabled { opacity: 0.6; }
 
-.logout {
-  background: #334155;
-}
+.logout { background: #334155; }
 
 .message {
   text-align: center;
@@ -83,30 +72,17 @@ button:disabled {
   line-height: 1.5;
 }
 
-.error {
-  color: #ff6b6b;
-}
+.error { color: #ff6b6b; }
+.success { color: #25d366; }
 
-.success {
-  color: #25d366;
-}
-
-.premium-content {
-  display: none;
-}
+.premium-content { display: none; }
 
 .pick {
   padding: 15px 0;
   border-bottom: 1px solid #29415b;
 }
 
-.pick:last-child {
-  border-bottom: none;
-}
-
-.pick strong {
-  color: #25d366;
-}
+.pick strong { color: #25d366; }
 
 .back {
   display: block;
@@ -130,127 +106,65 @@ button:disabled {
 
 <div class="container">
 
-  <!-- LOGIN -->
   <div class="card" id="loginCard">
-
     <h1>🔐 EddiePulse Premium</h1>
 
     <div class="subtitle">
       Login to access Premium Analytics
     </div>
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Email address"
-      autocomplete="email"
-    >
+    <input type="email" id="email"
+      placeholder="Email address" autocomplete="email">
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
+    <input type="password" id="password"
+      placeholder="Password" autocomplete="current-password">
 
-    <button id="loginButton">
-      🔐 Login
-    </button>
+    <button id="loginButton">🔐 Login</button>
 
-    <div
-      id="loginMessage"
-      class="message"
-      aria-live="polite"
-    ></div>
+    <div id="loginMessage" class="message"
+      aria-live="polite"></div>
 
     <p class="small">
       Premium access is available only to approved members.
     </p>
-
   </div>
 
-
-  <!-- PREMIUM CONTENT -->
-  <div
-    class="premium-content"
-    id="premiumContent"
-  >
+  <div class="premium-content" id="premiumContent">
 
     <div class="card">
-
       <h1>💎 Premium Analytics</h1>
 
       <div class="subtitle">
         Welcome to EddiePulse Premium
       </div>
 
-      <p>
-        🔥 Today's selected football analysis
-      </p>
+      <h2>🔥 Published Premium Predictions</h2>
 
-      <div class="pick">
-        ⚽ Match 1 —
-        <strong>Over 1.5 Goals</strong>
-      </div>
-
-      <div class="pick">
-        ⚽ Match 2 —
-        <strong>Home Win</strong>
-      </div>
-
-      <div class="pick">
-        ⚽ Match 3 —
-        <strong>Both Teams To Score</strong>
-      </div>
-
-      <div class="pick">
-        ⚽ Match 4 —
-        <strong>Draw No Bet</strong>
+      <div id="premiumPicks">
+        Loading premium predictions...
       </div>
 
       <p class="small">
-        These are football analysis estimates, not guaranteed results.
+        Predictions are analysis estimates, not guaranteed results.
         Please bet responsibly.
       </p>
-
     </div>
 
-
     <div class="card">
-
-      <h2>📊 Premium Analysis</h2>
-
-      <p>
-        Detailed match statistics, goal trends,
-        recent form and market insights will appear here.
-      </p>
-
-    </div>
-
-
-    <div class="card">
-
-      <button
-        class="logout"
-        id="logoutButton"
-      >
+      <button class="logout" id="logoutButton">
         🚪 Logout
       </button>
-
     </div>
 
   </div>
 
-
-  <a
-    class="back"
-    href="index.html"
-  >
+  <a class="back" href="index.html">
     ← Back to EddiePulse Analytics
   </a>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
@@ -258,225 +172,162 @@ const SUPABASE_URL =
   "https://mneqdvkagthqzgwsalkw.supabase.co";
 
 const SUPABASE_KEY =
-  "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+  "sb_publishable_QPWs81qv_fV4k7NptQ7HCQ_KZ7hv16";
 
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-const loginCard =
-  document.getElementById("loginCard");
+const loginCard = document.getElementById("loginCard");
+const premiumContent = document.getElementById("premiumContent");
+const loginButton = document.getElementById("loginButton");
+const loginMessage = document.getElementById("loginMessage");
+const premiumPicks = document.getElementById("premiumPicks");
 
-const premiumContent =
-  document.getElementById("premiumContent");
-
-const loginButton =
-  document.getElementById("loginButton");
-
-const logoutButton =
-  document.getElementById("logoutButton");
-
-const loginMessage =
-  document.getElementById("loginMessage");
-
-
-/* Load Supabase library */
-
-const script =
-  document.createElement("script");
-
-script.src =
-  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-
-script.onload = function() {
-
-  window.supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-  checkSession();
-
-};
-
-
-/* Add Supabase library to page */
-
-document.head.appendChild(script);
-
-
-/* Check existing login */
+function showMessage(message, type = "error") {
+  loginMessage.textContent = message;
+  loginMessage.className = "message " + type;
+}
 
 async function checkSession() {
+  try {
+    const { data, error } = await db.auth.getSession();
 
-  const {
-    data: {
-      session
+    if (error) throw error;
+
+    if (data.session) {
+      await checkPremiumAccess(data.session.user.id);
     }
-  } =
-  await window.supabaseClient.auth.getSession();
-
-
-  if (session) {
-
-    await checkPremiumAccess(
-      session.user.id
-    );
-
+  } catch (error) {
+    showMessage("Unable to connect: " + error.message);
   }
-
 }
 
+async function login() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-/* Login */
+  if (!email || !password) {
+    showMessage("Please enter your email and password.");
+    return;
+  }
 
-loginButton.addEventListener(
-  "click",
-  async function() {
+  loginButton.disabled = true;
+  loginButton.textContent = "Logging in...";
 
-    const email =
-      document.getElementById("email")
-      .value
-      .trim();
-
-    const password =
-      document.getElementById("password")
-      .value;
-
-
-    if (!email || !password) {
-
-      loginMessage.textContent =
-        "Please enter your email and password.";
-
-      loginMessage.className =
-        "message error";
-
-      return;
-
-    }
-
-
-    loginButton.disabled = true;
-
-    loginButton.textContent =
-      "Logging in...";
-
-
-    const {
-      data,
-      error
-    } =
-    await window.supabaseClient.auth.signInWithPassword({
-
-      email: email,
-
-      password: password
-
+  try {
+    const { data, error } = await db.auth.signInWithPassword({
+      email,
+      password
     });
 
+    if (error) throw error;
 
-    if (error) {
+    await checkPremiumAccess(data.user.id);
 
-      loginMessage.textContent =
-        "❌ Login failed. Check your email and password.";
-
-      loginMessage.className =
-        "message error";
-
-      loginButton.disabled = false;
-
-      loginButton.textContent =
-        "🔐 Login";
-
-      return;
-
-    }
-
-
-    await checkPremiumAccess(
-      data.user.id
-    );
-
+  } catch (error) {
+    showMessage("Login error: " + error.message);
+  } finally {
+    loginButton.disabled = false;
+    loginButton.textContent = "🔐 Login";
   }
-);
-
-
-/* Check approval */
-
-async function checkPremiumAccess(userId) {
-
-  const {
-    data,
-    error
-  } =
-  await window.supabaseClient
-    .from("premium_access")
-    .select("status")
-    .eq("user_id", userId)
-    .eq("status", "approved")
-    .maybeSingle();
-
-
-  if (error) {
-
-    loginMessage.textContent =
-      "❌ Unable to check Premium access.";
-
-    loginMessage.className =
-      "message error";
-
-    return;
-
-  }
-
-
-  if (!data) {
-
-    await window.supabaseClient.auth.signOut();
-
-    loginMessage.textContent =
-      "⏳ Your account has not been approved for Premium access yet.";
-
-    loginMessage.className =
-      "message error";
-
-    return;
-
-  }
-
-
-  /* Approved */
-
-  loginCard.style.display =
-    "none";
-
-  premiumContent.style.display =
-    "block";
-
 }
 
+async function checkPremiumAccess(userId) {
+  try {
+    const { data, error } = await db
+      .from("premium_access")
+      .select('"Status"')
+      .eq("user_id", userId)
+      .maybeSingle();
 
-/* Logout */
+    if (error) throw error;
 
-logoutButton.addEventListener(
-  "click",
-  async function() {
+    if (!data || data.Status !== "approved") {
+      await db.auth.signOut();
 
-    await window.supabaseClient.auth.signOut();
+      showMessage(
+        "Your account has not yet been approved for Premium access."
+      );
+      return;
+    }
 
-    premiumContent.style.display =
-      "none";
+    loginCard.style.display = "none";
+    premiumContent.style.display = "block";
 
-    loginCard.style.display =
-      "block";
+    await loadPremiumPicks();
 
-    loginMessage.textContent =
-      "You have been logged out.";
-
-    loginMessage.className =
-      "message success";
-
+  } catch (error) {
+    showMessage("Unable to verify Premium access: " + error.message);
   }
-);
+}
+
+async function loadPremiumPicks() {
+  premiumPicks.textContent = "Loading premium predictions...";
+
+  const { data, error } = await db
+    .from("premium_picks")
+    .select("*")
+    .eq("is_published", true)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    premiumPicks.textContent =
+      "Unable to load predictions: " + error.message;
+    return;
+  }
+
+  premiumPicks.replaceChildren();
+
+  if (!data || data.length === 0) {
+    premiumPicks.textContent =
+      "No premium predictions have been published yet.";
+    return;
+  }
+
+  data.forEach(pick => {
+    const card = document.createElement("div");
+    card.className = "pick";
+
+    const match = document.createElement("h3");
+    match.textContent = "⚽ " + pick.match_name;
+
+    const prediction = document.createElement("p");
+    prediction.innerHTML = "<strong>Prediction:</strong> ";
+    prediction.append(document.createTextNode(pick.prediction));
+
+    const analysis = document.createElement("p");
+    analysis.textContent = pick.analysis || "";
+
+    const date = document.createElement("small");
+    date.textContent = "Match date: " + (pick.match_date || "Not specified");
+
+    card.append(match, prediction, analysis, date);
+    premiumPicks.appendChild(card);
+  });
+}
+
+async function logout() {
+  const { error } = await db.auth.signOut();
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  premiumContent.style.display = "none";
+  loginCard.style.display = "block";
+
+  document.getElementById("password").value = "";
+
+  showMessage("You have been logged out.", "success");
+}
+
+loginButton.addEventListener("click", login);
+document.getElementById("logoutButton").addEventListener("click", logout);
+
+checkSession();
 
 </script>
 
