@@ -2,383 +2,233 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>EddiePulse Analytics | Football Insights</title>
+<title>EddiePulse Analytics — Admin</title>
 
-<meta name="description" content="EddiePulse Analytics provides football statistics, match analysis, free predictions and exclusive premium football insights.">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
+  padding: 18px;
   font-family: Arial, sans-serif;
   background: #08111f;
   color: white;
 }
 
-header {
-  padding: 32px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, #0d1b2e, #163451);
-}
-
-.logo {
-  font-size: 30px;
-  font-weight: 800;
-}
-
-.subtitle {
-  color: #aebdce;
-  margin-top: 8px;
-}
-
 .container {
   max-width: 750px;
   margin: auto;
-  padding: 20px;
 }
+
+h1 { color: #35d07f; }
 
 .card {
   background: #102238;
-  border: 1px solid #1d3a58;
-  border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 20px;
+  border: 1px solid #29415b;
+  border-radius: 14px;
+  padding: 18px;
+  margin: 18px 0;
 }
 
-h2 {
-  margin-top: 0;
+input, textarea, select, button {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  border-radius: 9px;
+  font-size: 16px;
 }
 
-.description {
-  color: #bdc8d8;
-  line-height: 1.6;
+input, textarea, select {
+  background: #08111f;
+  border: 1px solid #29415b;
+  color: white;
 }
+
+textarea { min-height: 100px; }
+
+button {
+  border: none;
+  background: #35d07f;
+  color: #08111f;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.secondary {
+  background: #40516c;
+  color: white;
+}
+
+.danger {
+  background: #c83e4d;
+  color: white;
+}
+
+.hidden { display: none; }
 
 .match {
   background: #0b192a;
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 12px;
-}
-
-.match-name {
-  font-weight: bold;
-  font-size: 17px;
-}
-
-.pick {
-  color: #25d366;
-  font-weight: bold;
-  margin-top: 9px;
-}
-
-.analysis {
-  color: #bdc8d8;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.badge {
-  display: inline-block;
-  background: #164c36;
-  color: #7cf0ae;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  margin-bottom: 12px;
-}
-
-.price {
-  font-size: 34px;
-  font-weight: 800;
-  text-align: center;
-  margin: 20px 0;
-  color: #ffcc00;
-}
-
-.button {
-  display: block;
-  width: 100%;
-  border-radius: 12px;
-  padding: 16px;
-  margin-top: 13px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-}
-
-.pay-button {
-  background: #ffcc00;
-  color: #111;
-}
-
-.whatsapp {
-  background: #25d366;
-  color: white;
-}
-
-input {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  margin-bottom: 12px;
   border-radius: 10px;
-  border: 1px solid #29415b;
-  background: #08111f;
-  color: white;
-  font-size: 16px;
-}
-
-input::placeholder {
-  color: #8294a8;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 12px;
-  background: #25d366;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.submit-button:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
-.request-message {
-  margin-top: 15px;
-  text-align: center;
-  line-height: 1.5;
+  padding: 14px;
+  margin: 12px 0;
   overflow-wrap: anywhere;
 }
 
-.notice {
-  color: #aebdce;
-  font-size: 13px;
-  line-height: 1.7;
-  text-align: center;
+.match h3 { margin-top: 0; }
+
+.status { color: #35d07f; }
+
+.message {
+  overflow-wrap: anywhere;
+  line-height: 1.5;
 }
 
-.empty-state {
-  padding: 20px;
-  background: #0b192a;
-  border-radius: 12px;
-  text-align: center;
-  color: #bdc8d8;
-  line-height: 1.6;
+label { display: block; margin-top: 12px; }
+
+.publish-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #8294a8;
-  font-size: 13px;
+.publish-label input {
+  width: auto;
 }
 
+small { color: #bdc8d8; }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">⚡ EddiePulse Analytics</div>
-
-  <div class="subtitle">
-    Football Insights • Match Analysis • Predictions
-  </div>
-
-  <p class="description">
-    Making football analysis easier to understand.
-  </p>
-</header>
-
 <div class="container">
 
-  <!-- FREE PREDICTIONS -->
+<h1>⚡ EddiePulse Analytics</h1>
+<h2>Admin Dashboard</h2>
 
-  <section class="card" id="free-predictions">
+<div id="loginBox" class="card">
 
-    <span class="badge">FREE ACCESS</span>
+  <h3>Owner Login</h3>
 
-    <h2>⚽ Today's Free Predictions</h2>
+  <form id="loginForm">
 
-    <p class="description">
-      Welcome to EddiePulse Free Predictions.
-      Explore our free football analysis and daily selections.
-    </p>
-
-    <div id="freePicks" class="empty-state">
-      Loading free predictions...
-    </div>
-
-  </section>
-
-
-  <!-- PREMIUM ANALYTICS -->
-
-  <section class="card" id="premium">
-
-    <span class="badge">EXCLUSIVE ACCESS</span>
-
-    <h2>💎 EddiePulse Premium Analytics</h2>
-
-    <p class="description">
-      Get access to exclusive football selections,
-      additional match analysis and premium insights.
-    </p>
-
-    <div class="price">GH₵80</div>
-
-    <a
-      class="button pay-button"
-      href="https://paystack.shop/pay/4z32d1u79v"
-      target="_blank"
-      rel="noopener noreferrer"
+    <input
+      id="email"
+      type="email"
+      placeholder="Owner email"
+      autocomplete="username"
+      required
     >
-      💰 Subscribe to Premium – GH₵80
-    </a>
 
-    <a
-      class="button whatsapp"
-      href="https://wa.me/233256584653?text=Hello%20EddiePulse%2C%20I%20need%20help%20with%20Premium%20Analytics."
-      target="_blank"
-      rel="noopener noreferrer"
+    <input
+      id="password"
+      type="password"
+      placeholder="Owner password"
+      autocomplete="current-password"
+      required
     >
-      📲 Contact EddiePulse on WhatsApp
-    </a>
 
-    <p class="notice">
-      Payments are processed through Paystack.
-      Follow the instructions below after completing payment.
-    </p>
+    <button type="submit" id="loginButton">
+      Login to Dashboard
+    </button>
 
-  </section>
+  </form>
 
-
-  <!-- PREMIUM ACCESS REQUEST -->
-
-  <section class="card">
-
-    <h2>🔐 Request Premium Access</h2>
-
-    <p class="description">
-      After completing your GH₵80 payment, enter your
-      details and Paystack payment reference.
-      Your payment will be verified manually.
-    </p>
-
-    <form id="premiumRequestForm">
-
-      <input
-        type="text"
-        id="fullName"
-        placeholder="Full Name"
-        autocomplete="name"
-        required
-      >
-
-      <input
-        type="tel"
-        id="whatsappNumber"
-        placeholder="WhatsApp Number"
-        autocomplete="tel"
-        required
-      >
-
-      <input
-        type="text"
-        id="paymentReference"
-        placeholder="Paystack Payment Reference"
-        required
-      >
-
-      <button
-        type="submit"
-        class="submit-button"
-        id="submitButton"
-      >
-        🔐 Submit Access Request
-      </button>
-
-    </form>
-
-    <div
-      id="requestMessage"
-      class="request-message"
-      aria-live="polite"
-    ></div>
-
-  </section>
-
-
-  <!-- WHAT WE PROVIDE -->
-
-  <section class="card">
-
-    <h2>⚽ What We Provide</h2>
-
-    <p>✓ Football match statistics</p>
-    <p>✓ Goal analysis</p>
-    <p>✓ Over/Under insights</p>
-    <p>✓ Both Teams To Score analysis</p>
-    <p>✓ Match-result predictions</p>
-    <p>✓ Premium football insights</p>
-
-  </section>
-
-
-  <!-- CUSTOMER INSTRUCTIONS -->
-
-  <section class="card">
-
-    <h2>📌 How to Join Premium</h2>
-
-    <p>1. Explore EddiePulse Analytics.</p>
-    <p>2. Subscribe through our Paystack payment page.</p>
-    <p>3. Complete your GH₵80 payment.</p>
-    <p>4. Submit your payment reference and WhatsApp number.</p>
-    <p>5. Wait for manual payment verification.</p>
-    <p>6. Receive your Premium account access after approval.</p>
-
-  </section>
-
-
-  <!-- RESPONSIBLE BETTING -->
-
-  <section class="card">
-
-    <h2>⚠️ Responsible Betting</h2>
-
-    <p class="notice">
-      EddiePulse Analytics provides football analysis
-      and predictions for informational purposes.
-
-      Predictions are not guaranteed results.
-      Always make responsible decisions and never
-      stake money you cannot afford to lose.
-    </p>
-
-  </section>
+  <p id="loginMessage" class="message"></p>
 
 </div>
 
-<footer>
-  © 2026 EddiePulse Analytics.
-  All rights reserved.
-</footer>
+
+<div id="dashboard" class="hidden">
+
+  <p class="status">✓ Owner dashboard</p>
+
+  <button id="logoutButton" class="secondary">
+    Logout
+  </button>
+
+  <div class="card">
+
+    <h3 id="formTitle">Add New Prediction</h3>
+
+    <label for="category">Prediction category</label>
+
+    <select id="category">
+      <option value="free_picks">Free Predictions</option>
+      <option value="premium_picks">Premium Predictions</option>
+    </select>
+
+    <input
+      id="match"
+      placeholder="Match (e.g. Arsenal vs Chelsea)"
+      required
+    >
+
+    <input
+      id="prediction"
+      placeholder="Prediction (e.g. Over 1.5 Goals)"
+      required
+    >
+
+    <textarea
+      id="analysis"
+      placeholder="Write your match analysis"
+    ></textarea>
+
+    <label for="matchDate">Match date</label>
+
+    <input id="matchDate" type="date">
+
+    <label class="publish-label">
+      <input id="published" type="checkbox" checked>
+      Publish immediately
+    </label>
+
+    <button id="saveButton">
+      Save Prediction
+    </button>
+
+    <button
+      id="cancelEdit"
+      class="secondary hidden"
+      type="button"
+    >
+      Cancel Edit
+    </button>
+
+    <p id="saveMessage" class="message"></p>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>🟢 Free Predictions</h3>
+
+    <div id="freePicks">
+      Loading free predictions...
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>💎 Premium Predictions</h3>
+
+    <div id="premiumPicks">
+      Loading premium predictions...
+    </div>
+
+  </div>
+
+</div>
+
+</div>
 
 
 <script>
@@ -386,234 +236,417 @@ footer {
 const SUPABASE_URL =
   "https://mneqdvkagthqzgwsalkw.supabase.co";
 
+// Use the exact Publishable key copied from your Supabase dashboard.
 const SUPABASE_KEY =
-  "sb_publishable_QPWs81qv_fV4k7NptQ7HCQ_KZ7hv16";
+  "sb_publishable_QPWs81qv_fV4k7NptQ7HCQ_KZ7hv16X";
 
+const OWNER_ID =
+  "aa8c51b1-37b3-4ffc-a1c3-011930c924ee";
 
-// ===================================
-// LOAD FREE PREDICTIONS
-// ===================================
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-async function loadFreePicks() {
+let editingId = null;
+let editingTable = null;
 
-  const container =
-    document.getElementById("freePicks");
+const loginBox = document.getElementById("loginBox");
+const dashboard = document.getElementById("dashboard");
 
-  container.textContent =
-    "Loading free predictions...";
+const loginForm = document.getElementById("loginForm");
+const loginButton = document.getElementById("loginButton");
+const loginMessage = document.getElementById("loginMessage");
 
-  try {
+const category = document.getElementById("category");
+const matchInput = document.getElementById("match");
+const predictionInput = document.getElementById("prediction");
+const analysisInput = document.getElementById("analysis");
+const matchDateInput = document.getElementById("matchDate");
+const publishedInput = document.getElementById("published");
 
-    const response = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/free_picks?select=*&is_published=eq.true&order=created_at.desc",
-      {
-        method: "GET",
-        headers: {
-          "apikey": SUPABASE_KEY
-        }
-      }
-    );
+const saveMessage = document.getElementById("saveMessage");
+const saveButton = document.getElementById("saveButton");
+const cancelEdit = document.getElementById("cancelEdit");
 
-    if (!response.ok) {
+function showLogin() {
+  loginBox.classList.remove("hidden");
+  dashboard.classList.add("hidden");
+}
 
-      const errorText = await response.text();
+function showDashboard() {
+  loginBox.classList.add("hidden");
+  dashboard.classList.remove("hidden");
+}
 
-      throw new Error(errorText);
+async function checkSession() {
 
-    }
+  loginMessage.textContent = "Checking login...";
 
-    const picks = await response.json();
+  const { data, error } = await db.auth.getSession();
 
-    container.replaceChildren();
-
-    if (!picks || picks.length === 0) {
-
-      container.textContent =
-        "📊 No free predictions have been published yet. Please check back soon.";
-
-      return;
-
-    }
-
-    picks.forEach(pick => {
-
-      const card = document.createElement("div");
-
-      card.className = "match";
-
-      const name = document.createElement("div");
-
-      name.className = "match-name";
-
-      name.textContent =
-        "⚽ " + pick.match_name;
-
-      const prediction = document.createElement("div");
-
-      prediction.className = "pick";
-
-      prediction.textContent =
-        "Prediction: " + pick.prediction;
-
-      const analysis = document.createElement("p");
-
-      analysis.className = "analysis";
-
-      analysis.textContent =
-        pick.analysis || "No additional analysis provided.";
-
-      const date = document.createElement("p");
-
-      date.className = "analysis";
-
-      date.textContent =
-        "Match date: " + (pick.match_date || "Not specified");
-
-      card.append(
-        name,
-        prediction,
-        analysis,
-        date
-      );
-
-      container.appendChild(card);
-
-    });
-
-  } catch (error) {
-
-    console.error("Free predictions error:", error);
-
-    container.textContent =
-      "Unable to load free predictions. " + error.message;
-
+  if (error) {
+    loginMessage.textContent = error.message;
+    showLogin();
+    return;
   }
 
+  const session = data.session;
+
+  if (!session) {
+    loginMessage.textContent = "";
+    showLogin();
+    return;
+  }
+
+  if (session.user.id !== OWNER_ID) {
+
+    await db.auth.signOut();
+
+    loginMessage.textContent =
+      "Access denied. Please sign in with the owner account.";
+
+    showLogin();
+    return;
+  }
+
+  showDashboard();
+
+  await loadAllPicks();
 }
 
 
-// ===================================
-// PREMIUM ACCESS REQUEST
-// ===================================
+// OWNER LOGIN
 
-const form =
-  document.getElementById("premiumRequestForm");
-
-const submitButton =
-  document.getElementById("submitButton");
-
-const requestMessage =
-  document.getElementById("requestMessage");
-
-
-form.addEventListener("submit", async function(event) {
+loginForm.addEventListener("submit", async function(event) {
 
   event.preventDefault();
 
-  const fullName =
-    document.getElementById("fullName").value.trim();
+  loginButton.disabled = true;
+  loginButton.textContent = "Signing in...";
+  loginMessage.textContent = "";
 
-  const whatsappNumber =
-    document.getElementById("whatsappNumber").value.trim();
-
-  const paymentReference =
-    document.getElementById("paymentReference").value.trim();
-
-
-  if (!fullName || !whatsappNumber || !paymentReference) {
-
-    requestMessage.textContent =
-      "Please complete all fields.";
-
-    return;
-
-  }
-
-
-  submitButton.disabled = true;
-
-  submitButton.textContent =
-    "Submitting...";
-
-  requestMessage.textContent = "";
-
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
   try {
 
-    const response = await fetch(
-      SUPABASE_URL + "/rest/v1/premium_requests",
-      {
+    const { error } = await db.auth.signInWithPassword({
+      email,
+      password
+    });
 
-        method: "POST",
+    if (error) throw error;
 
-        headers: {
-
-          "apikey": SUPABASE_KEY,
-
-          "Content-Type": "application/json",
-
-          "Prefer": "return=minimal"
-
-        },
-
-        body: JSON.stringify({
-
-          full_name: fullName,
-
-          whatsapp_number: whatsappNumber,
-
-          payment_reference: paymentReference,
-
-          status: "pending"
-
-        })
-
-      }
-    );
-
-
-    if (!response.ok) {
-
-      const errorText = await response.text();
-
-      throw new Error(errorText);
-
-    }
-
-
-    requestMessage.textContent =
-      "✅ Your request has been submitted successfully! " +
-      "We will verify your payment and contact you about Premium access.";
-
-    form.reset();
-
+    await checkSession();
 
   } catch (error) {
 
-    console.error("Premium request error:", error);
-
-    requestMessage.textContent =
-      "❌ Submission failed: " + error.message;
-
+    loginMessage.textContent = error.message;
 
   } finally {
 
-    submitButton.disabled = false;
-
-    submitButton.textContent =
-      "🔐 Submit Access Request";
+    loginButton.disabled = false;
+    loginButton.textContent = "Login to Dashboard";
 
   }
 
 });
 
 
-// ===================================
-// START HOMEPAGE
-// ===================================
+// LOGOUT
 
-loadFreePicks();
+document.getElementById("logoutButton")
+.addEventListener("click", async function() {
+
+  await db.auth.signOut();
+
+  location.reload();
+
+});
+
+
+// SELECT DATABASE TABLE
+
+function selectedTable() {
+  return category.value;
+}
+
+
+// SAVE OR UPDATE PREDICTION
+
+saveButton.addEventListener("click", savePick);
+
+async function savePick() {
+
+  const match = matchInput.value.trim();
+  const prediction = predictionInput.value.trim();
+
+  if (!match || !prediction) {
+    saveMessage.textContent =
+      "Please enter the match and prediction.";
+    return;
+  }
+
+  const table = editingId ? editingTable : selectedTable();
+
+  const pick = {
+    match_name: match,
+    prediction: prediction,
+    analysis: analysisInput.value.trim(),
+    match_date: matchDateInput.value || null,
+    is_published: publishedInput.checked
+  };
+
+  saveButton.disabled = true;
+  saveMessage.textContent = "Saving prediction...";
+
+  try {
+
+    let result;
+
+    if (editingId) {
+
+      result = await db
+        .from(table)
+        .update(pick)
+        .eq("id", editingId);
+
+    } else {
+
+      result = await db
+        .from(table)
+        .insert(pick);
+
+    }
+
+    if (result.error) throw result.error;
+
+    saveMessage.textContent =
+      "✅ Prediction saved successfully.";
+
+    resetForm();
+
+    await loadAllPicks();
+
+  } catch (error) {
+
+    saveMessage.textContent =
+      "❌ " + error.message;
+
+  } finally {
+
+    saveButton.disabled = false;
+
+  }
+
+}
+
+
+// LOAD BOTH CATEGORIES
+
+async function loadAllPicks() {
+
+  await loadPicks("free_picks", "freePicks");
+
+  await loadPicks("premium_picks", "premiumPicks");
+
+}
+
+
+async function loadPicks(table, elementId) {
+
+  const box = document.getElementById(elementId);
+
+  box.textContent = "Loading...";
+
+  const { data, error } = await db
+    .from(table)
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+
+    box.textContent = "Unable to load: " + error.message;
+
+    return;
+
+  }
+
+  box.replaceChildren();
+
+  if (!data || data.length === 0) {
+
+    box.textContent = "No predictions added yet.";
+
+    return;
+
+  }
+
+  data.forEach(pick => {
+
+    const card = document.createElement("div");
+    card.className = "match";
+
+    const title = document.createElement("h3");
+    title.textContent = pick.match_name;
+
+    const prediction = document.createElement("p");
+    prediction.textContent = "Prediction: " + pick.prediction;
+
+    const analysis = document.createElement("p");
+    analysis.textContent = pick.analysis || "No analysis added.";
+
+    const date = document.createElement("small");
+    date.textContent =
+      "Match date: " + (pick.match_date || "Not set");
+
+    const status = document.createElement("p");
+    status.className = "status";
+    status.textContent =
+      pick.is_published ? "Published" : "Unpublished";
+
+    const edit = document.createElement("button");
+    edit.textContent = "Edit";
+    edit.className = "secondary";
+    edit.addEventListener("click", () => editPick(pick, table));
+
+    const toggle = document.createElement("button");
+    toggle.textContent =
+      pick.is_published ? "Unpublish" : "Publish";
+    toggle.className = "secondary";
+    toggle.addEventListener("click", () => togglePublish(pick, table));
+
+    const remove = document.createElement("button");
+    remove.textContent = "Delete";
+    remove.className = "danger";
+    remove.addEventListener("click", () => deletePick(pick.id, table));
+
+    card.append(
+      title,
+      prediction,
+      analysis,
+      date,
+      status,
+      edit,
+      toggle,
+      remove
+    );
+
+    box.appendChild(card);
+
+  });
+
+}
+
+
+// EDIT PREDICTION
+
+function editPick(pick, table) {
+
+  editingId = pick.id;
+  editingTable = table;
+
+  category.value = table;
+  category.disabled = true;
+
+  matchInput.value = pick.match_name;
+  predictionInput.value = pick.prediction;
+  analysisInput.value = pick.analysis || "";
+  matchDateInput.value = pick.match_date || "";
+  publishedInput.checked = pick.is_published;
+
+  document.getElementById("formTitle").textContent =
+    "Edit Prediction";
+
+  saveButton.textContent = "Update Prediction";
+
+  cancelEdit.classList.remove("hidden");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+}
+
+
+// PUBLISH OR UNPUBLISH
+
+async function togglePublish(pick, table) {
+
+  const { error } = await db
+    .from(table)
+    .update({ is_published: !pick.is_published })
+    .eq("id", pick.id);
+
+  if (error) {
+
+    alert(error.message);
+    return;
+
+  }
+
+  await loadAllPicks();
+
+}
+
+
+// DELETE PREDICTION
+
+async function deletePick(id, table) {
+
+  if (!confirm("Are you sure you want to delete this prediction?")) {
+    return;
+  }
+
+  const { error } = await db
+    .from(table)
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+
+    alert(error.message);
+    return;
+
+  }
+
+  await loadAllPicks();
+
+}
+
+
+// RESET FORM
+
+function resetForm() {
+
+  editingId = null;
+  editingTable = null;
+
+  category.disabled = false;
+
+  category.value = "free_picks";
+
+  matchInput.value = "";
+  predictionInput.value = "";
+  analysisInput.value = "";
+  matchDateInput.value = "";
+
+  publishedInput.checked = true;
+
+  document.getElementById("formTitle").textContent =
+    "Add New Prediction";
+
+  saveButton.textContent = "Save Prediction";
+
+  cancelEdit.classList.add("hidden");
+
+}
+
+cancelEdit.addEventListener("click", resetForm);
+
+
+// START
+
+checkSession();
 
 </script>
 
